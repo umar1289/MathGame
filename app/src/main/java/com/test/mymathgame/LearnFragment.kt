@@ -1,16 +1,19 @@
 package com.test.mymathgame
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.test.mymathgame.databinding.FragmentLearnBinding
-import kotlinx.android.synthetic.main.custom_dialog.view.*
 import java.util.*
 
 class LearnFragment : Fragment() {
@@ -18,7 +21,6 @@ class LearnFragment : Fragment() {
     var number2 = 0
     var trueAnswer = 0
     var answer = 0
-    var point = 0
     var falseAnswer1 = 0
     var falseAnswer2 = 0
     var falseAnswer3 = 0
@@ -26,8 +28,6 @@ class LearnFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
     }
 
     lateinit var binding: FragmentLearnBinding
@@ -36,6 +36,11 @@ class LearnFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLearnBinding.inflate(LayoutInflater.from(context))
+
+        binding.card1.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+        binding.card2.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+        binding.card3.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+        binding.card4.setCardBackgroundColor(Color.parseColor("#16A5FF"))
 
         return binding.root
     }
@@ -46,76 +51,26 @@ class LearnFragment : Fragment() {
         random()
         showCarrots()
         binding.card1.setOnClickListener {
-            if (binding.txt1.text.toString().toInt() == trueAnswer) {
-                point++
-                random()
-                showCarrots()
-            } else {
-                random()
-                showCarrots()
-            }
-            if (task == 10) {
-                showDialog()
-                findNavController().navigate(R.id.homeFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card1, binding.txt1)
         }
 
         binding.card2.setOnClickListener {
-            if (binding.txt2.text.toString().toInt() == trueAnswer) {
-                point++
-                random()
-                showCarrots()
-            } else {
-                random()
-                showCarrots()
-            }
-            if (task == 10) {
-                showDialog()
-                findNavController().navigate(R.id.homeFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card2, binding.txt2)
         }
 
         binding.card3.setOnClickListener {
-            if (binding.txt3.text.toString().toInt() == trueAnswer) {
-                point++
-                random()
-                showCarrots()
-            } else {
-                random()
-                showCarrots()
-            }
-            if (task == 10) {
-                showDialog()
-                findNavController().navigate(R.id.homeFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card3, binding.txt3)
         }
 
         binding.card4.setOnClickListener {
-            if (binding.txt4.text.toString().toInt() == trueAnswer) {
-                point++
-                random()
-                showCarrots()
-            } else {
-                random()
-                showCarrots()
-            }
-            if (task == 10) {
-                showDialog()
-                findNavController().navigate(R.id.homeFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card4, binding.txt4)
         }
+
+        binding.back.setOnClickListener {
+            activity?.onBackPressed()
+            findNavController().navigate(R.id.homeFragment)
+        }
+
     }
 
     private fun random() {
@@ -179,23 +134,6 @@ class LearnFragment : Fragment() {
     private fun rand(start: Int, end: Int): Int {
         require(start <= end) { "Illegal Argument" }
         return (start..end).random()
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun showDialog() {
-        val alertDialog = AlertDialog.Builder(context)
-        val dialog = alertDialog.create()
-
-        val dialogView = layoutInflater.inflate(R.layout.custom_dialog, null, false)
-        dialog.setView(dialogView)
-
-        dialogView.tasks.text = "Tasks: $task"
-        dialogView.answers.text = "True: $point"
-
-        dialogView.btn.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 
     private fun showCarrots() {
@@ -1019,9 +957,64 @@ class LearnFragment : Fragment() {
                     }
                 }
             }
-        }else{
-            binding.example.visibility = View.INVISIBLE
-            binding.txtWarning.visibility = View.VISIBLE
         }
     }
+
+    private fun timer(card: CardView, text: TextView) {
+        val timer = object : CountDownTimer(1200, 1200) {
+            override fun onTick(p0: Long) {
+                val animation1 = AnimationUtils.loadAnimation(context, R.anim.anim1)
+                val animation2 = AnimationUtils.loadAnimation(context, R.anim.anim2)
+                if (text.text.toString() == trueAnswer.toString()) {
+                    card.setCardBackgroundColor(Color.parseColor("#51CB00"))
+                    card.startAnimation(animation2)
+                } else {
+                    card.startAnimation(animation1)
+                    card.setCardBackgroundColor(Color.parseColor("#EC1F40"))
+                    cancel()
+                    animation1.setAnimationListener(object : Animation.AnimationListener{
+                        override fun onAnimationStart(p0: Animation?) {
+
+                        }
+
+                        override fun onAnimationEnd(p0: Animation?) {
+                            binding.card1.isClickable = true
+                            binding.card2.isClickable = true
+                            binding.card3.isClickable = true
+                            binding.card4.isClickable = true
+                        }
+
+                        override fun onAnimationRepeat(p0: Animation?) {
+
+                        }
+                    })
+                }
+
+                binding.card1.isClickable = false
+                binding.card2.isClickable = false
+                binding.card3.isClickable = false
+                binding.card4.isClickable = false
+
+            }
+
+            override fun onFinish() {
+                card.clearAnimation()
+
+                task++
+                binding.task.text = "Task: $task"
+                binding.card1.isClickable = true
+                binding.card2.isClickable = true
+                binding.card3.isClickable = true
+                binding.card4.isClickable = true
+                binding.card1.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+                binding.card2.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+                binding.card3.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+                binding.card4.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+                random()
+                showCarrots()
+            }
+        }
+        timer.start()
+    }
+
 }

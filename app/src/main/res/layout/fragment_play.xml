@@ -59,7 +59,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/dark_blue"
                     app:cardCornerRadius="30dp">
 
                     <TextView
@@ -82,7 +81,6 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/dark_blue"
                     app:cardCornerRadius="30dp">
 
                     <TextView
@@ -117,7 +115,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/dark_blue"
                     app:cardCornerRadius="30dp">
 
                     <TextView
@@ -141,7 +138,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/dark_blue"
                     app:cardCornerRadius="30dp">
 
                     <TextView

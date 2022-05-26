@@ -2,14 +2,19 @@ package com.test.mymathgame
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.test.mymathgame.databinding.FragmentPlayBinding
 import kotlinx.android.synthetic.main.custom_dialog.view.*
@@ -46,6 +51,11 @@ class PlayFragment : Fragment() {
     ): View {
         binding = FragmentPlayBinding.inflate(LayoutInflater.from(context))
 
+        binding.card1.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+        binding.card2.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+        binding.card3.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+        binding.card4.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+
         return binding.root
     }
 
@@ -54,91 +64,19 @@ class PlayFragment : Fragment() {
         random()
 
         binding.card1.setOnClickListener {
-            if (binding.txt1.text.toString().toInt() == trueAnswer && task != 10) {
-                point++
-                random()
-            } else if (task != 10) {
-                false_answer++
-                random()
-            }
-            if (task == 10) {
-                if (binding.txt1.text.toString().toInt() == trueAnswer) {
-                    point++
-                } else if (task != 10) {
-                    false_answer++
-                }
-                activity?.onBackPressed()
-                findNavController().navigate(R.id.resultFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card1, binding.txt1)
         }
 
         binding.card2.setOnClickListener {
-            if (binding.txt2.text.toString().toInt() == trueAnswer && task != 10) {
-                point++
-                random()
-            } else if (task != 10) {
-                false_answer++
-                random()
-            }
-            if (task == 10) {
-                if (binding.txt1.text.toString().toInt() == trueAnswer) {
-                    point++
-                } else if (task != 10) {
-                    false_answer++
-                }
-                activity?.onBackPressed()
-                findNavController().navigate(R.id.resultFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card2, binding.txt2)
         }
 
         binding.card3.setOnClickListener {
-            if (binding.txt3.text.toString().toInt() == trueAnswer && task != 10) {
-                point++
-                random()
-            } else if (task != 10) {
-                false_answer++
-                random()
-            }
-            if (task == 10) {
-                if (binding.txt1.text.toString().toInt() == trueAnswer) {
-                    point++
-                } else if (task != 10) {
-                    false_answer++
-                }
-                activity?.onBackPressed()
-                findNavController().navigate(R.id.resultFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card3, binding.txt3)
         }
 
         binding.card4.setOnClickListener {
-            if (binding.txt4.text.toString().toInt() == trueAnswer && task != 10) {
-                point++
-                random()
-            } else if (task != 10) {
-                false_answer++
-                random()
-            }
-            if (task == 10) {
-                if (binding.txt1.text.toString().toInt() == trueAnswer) {
-                    point++
-                } else if (task != 10) {
-                    false_answer++
-                }
-                activity?.onBackPressed()
-                findNavController().navigate(R.id.resultFragment)
-            } else {
-                task++
-                binding.task.text = "Task: $task"
-            }
+            timer(binding.card4, binding.txt4)
         }
     }
 
@@ -202,5 +140,48 @@ class PlayFragment : Fragment() {
     private fun rand(start: Int, end: Int): Int {
         require(start <= end) { "Illegal Argument" }
         return (start..end).random()
+    }
+
+    fun timer(card: CardView, text: TextView) {
+        val timer = object : CountDownTimer(1200, 1200) {
+            override fun onTick(p0: Long) {
+                val animation1 = AnimationUtils.loadAnimation(context, R.anim.anim1)
+                val animation2 = AnimationUtils.loadAnimation(context, R.anim.anim2)
+                if (text.text.toString() == trueAnswer.toString()) {
+                    card.setCardBackgroundColor(Color.parseColor("#51CB00"))
+                    card.startAnimation(animation2)
+                    point++
+                } else {
+                    card.startAnimation(animation1)
+                    card.setCardBackgroundColor(Color.parseColor("#EC1F40"))
+                    false_answer++
+                }
+
+                binding.card1.isClickable = false
+                binding.card2.isClickable = false
+                binding.card3.isClickable = false
+                binding.card4.isClickable = false
+
+            }
+
+            override fun onFinish() {
+                card.clearAnimation()
+
+                if (task == 10) {
+
+                    activity?.onBackPressed()
+                    findNavController().navigate(R.id.resultFragment)
+                }
+                task++
+                binding.task.text = "Task: $task"
+                binding.card1.isClickable = true
+                binding.card2.isClickable = true
+                binding.card3.isClickable = true
+                binding.card4.isClickable = true
+                card.setCardBackgroundColor(Color.parseColor("#16A5FF"))
+                random()
+            }
+        }
+        timer.start()
     }
 }

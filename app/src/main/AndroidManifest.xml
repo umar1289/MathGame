@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.test.mymathgame">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic"
@@ -9,6 +13,9 @@
         android:roundIcon="@mipmap/ic"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyMathGame">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2160316846631976~1192613815" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

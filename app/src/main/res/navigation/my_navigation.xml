@@ -14,9 +14,6 @@
             android:id="@+id/action_homeFragment_to_playFragment"
             app:destination="@id/playFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_learnFragment"
-            app:destination="@id/learnFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action

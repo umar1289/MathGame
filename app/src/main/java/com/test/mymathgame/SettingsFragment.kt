@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.test.mymathgame.databinding.FragmentSettingsBinding
 
 var operation = 0
@@ -50,6 +51,7 @@ class SettingsFragment : Fragment() {
             toNumbersRangeTextA = binding.toNumbersRangeA.text.toString().toInt()
             fromNumbersRangeTextB = binding.fromNumbersRangeB.text.toString().toInt()
             toNumbersRangeTextB = binding.toNumbersRangeB.text.toString().toInt()
+            findNavController().popBackStack()
         }
         binding.fromNumbersRangeA.setText(fromNumbersRangeTextA.toString())
         binding.toNumbersRangeA.setText(toNumbersRangeTextA.toString())

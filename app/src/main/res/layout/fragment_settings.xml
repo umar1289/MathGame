@@ -78,7 +78,7 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="40dp"
+                app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -108,7 +108,7 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="40dp"
+                app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/division"
                 app:layout_constraintTop_toTopOf="parent">
@@ -313,7 +313,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         tools:layout_editor_absoluteX="۵dp">
 
@@ -407,7 +407,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_margin="5dp"
-                        app:cardCornerRadius="20dp"
+                        app:cardCornerRadius="15dp"
                         app:layout_constraintBottom_toBottomOf="parent">
 
                         <LinearLayout
