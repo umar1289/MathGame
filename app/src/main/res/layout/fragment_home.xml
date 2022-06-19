@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/yellow"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
@@ -10,7 +11,8 @@
     <LinearLayout
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,31 +31,40 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
         android:background="@color/shadow"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        app:cardCornerRadius="30dp"
-        android:backgroundTint="@color/shadow"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        android:layout_margin="25dp"/>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
         app:cardCornerRadius="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:backgroundTint="@color/shadow"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
-        android:layout_margin="20dp">
+        android:layout_marginTop="5dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="30dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="parent">
 
         <androidx.cardview.widget.CardView
 
@@ -77,23 +88,23 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
         app:cardCornerRadius="30dp"
         android:backgroundTint="@color/shadow"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-        android:layout_margin="25dp"/>
+        android:layout_marginTop="5dp"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/share"
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-        android:layout_margin="20dp">
+        app:layout_constraintLeft_toRightOf="parent">
 
 
         <androidx.cardview.widget.CardView
@@ -113,6 +124,20 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="9">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/learn_copy"
@@ -215,13 +240,19 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/math"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintBottom_toTopOf="@+id/table"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/table"
+        app:lottie_rawRes="@raw/lottie"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

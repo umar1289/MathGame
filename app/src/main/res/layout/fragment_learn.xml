@@ -67,7 +67,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="7dp"
-        android:background="#9A6C673E"
+        android:background="@color/shadow"
         app:layout_constraintTop_toBottomOf="@+id/title"
         android:orientation="horizontal" />
 
@@ -79,23 +79,21 @@
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintBottom_toTopOf="@+id/card_main"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/example"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/yellow"
-        android:visibility="invisible"
+        android:backgroundTint="@color/dark_blue"
+        android:visibility="visible"
         app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/card_main"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/title">
 
         <LinearLayout
             android:layout_width="match_parent"

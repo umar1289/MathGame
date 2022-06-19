@@ -229,6 +229,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/numberRange"
         android:layout_width="match_parent"
         android:layout_height="175dp"
         android:layout_marginLeft="20dp"
@@ -484,5 +485,16 @@
 
 
     </androidx.cardview.widget.CardView>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/numberRange"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/save"
+        app:lottie_rawRes="@raw/settings"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
